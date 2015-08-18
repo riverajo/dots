@@ -10,9 +10,9 @@
 # ░░   ░░ ░░ ░░░   ░░ ░░    ░░  ░░░     ░░░░░  
 #
 #  ▓▓▓▓▓▓▓▓▓▓
-# ░▓ author ▓ xero <x@xero.nu>
-# ░▓ code   ▓ http://code.xero.nu/dotfiles
-# ░▓ mirror ▓ http://git.io/.files
+# ░▓ author ▓ joe
+# ░▓ code   ▓ 
+# ░▓ mirror ▓ 
 # ░▓▓▓▓▓▓▓▓▓▓
 # ░░░░░░░░░░
 userresources=$HOME/.Xresources

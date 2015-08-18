@@ -12,6 +12,26 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+-- {{{ Function definitions
+
+-- scan directory, and optionally filter outputs
+function scandir(directory, filter)
+    local i, t, popen = 0, {}, io.popen
+    if not filter then
+        filter = function(s) return true end
+    end
+    print(filter)
+    for filename in popen('ls -a "'..directory..'"'):lines() do
+        if filter(filename) then
+            i = i + 1
+            t[i] = filename
+        end
+    end
+    return t
+end
+
+-- }}}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -56,7 +76,6 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -67,16 +86,41 @@ local layouts =
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating,
 }
 -- }}}
 
 -- {{{ Wallpaper
---if beautiful.wallpaper then
---   for s = 1, screen.count() do
---       gears.wallpaper.maximized(beautiful.wallpaper, s, true)
---   end
---end
+wp_index = 1
+wp_timeout  = 10
+wp_path = "/home/joseph.d.rivera/.wallpaper/"
+wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
+wp_files = scandir(wp_path, wp_filter)
+
+-- setup the timer
+wp_timer = timer { timeout = wp_timeout }
+wp_timer:connect_signal("timeout", function()
+
+  -- set wallpaper to current index for all screens
+  for s = 1, screen.count() do
+    gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+  end
+ 
+  -- stop the timer (we don't need multiple instances running at the same time)
+  wp_timer:stop()
+ 
+  -- get next random index
+  wp_index = math.random( 1, #wp_files)
+ 
+  --restart the timer
+  wp_timer.timeout = wp_timeout
+  wp_timer:start()
+end)
+ 
+-- initial start when rc.lua is first run
+wp_timer:start()
+
 -- }}}
 
 -- {{{ Tags
@@ -185,7 +229,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
---    left_layout:add(mylauncher)
+    -- left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
@@ -362,7 +406,8 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons ,
+                     size_hints_honor = false } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -446,4 +491,34 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+
+-- {{{ Battery
+local function trim(s)
+  return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
+end
+
+local function bat_notification()
+  
+  local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
+  local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
+
+  local bat_capacity = tonumber(f_capacity:read("*all"))
+  local bat_status = trim(f_status:read("*all"))
+
+  if (bat_capacity <= 10 and bat_status == "Discharging") then
+    naughty.notify({ title      = "Battery Warning"
+      , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
+      , fg="#ff0000"
+      , bg="#deb887"
+      , timeout    = 15
+      , position   = "bottom_left"
+    })
+  end
+end
+
+battimer = timer({timeout = 120})
+battimer:connect_signal("timeout", bat_notification)
+battimer:start()
 -- }}}
