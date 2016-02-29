@@ -8,19 +8,21 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'ervandew/supertab'
-Bundle 'scrooloose/syntastic'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'msanders/snipmate.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/Gundo'
-Bundle 'phleet/vim-mercenary'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'saltstack/salt-vim'
-Bundle "wookiehangover/jshint.vim"
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'msanders/snipmate.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Gundo'
+Plugin 'phleet/vim-mercenary'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'saltstack/salt-vim'
+Plugin 'wookiehangover/jshint.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 
 

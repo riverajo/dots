@@ -93,7 +93,7 @@ local layouts =
 
 -- {{{ Wallpaper
 wp_index = 1
-wp_timeout  = 10
+wp_timeout  = 600
 wp_path = "/home/joseph.d.rivera/.wallpaper/"
 wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
 wp_files = scandir(wp_path, wp_filter)
@@ -492,7 +492,6 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
 
 -- {{{ Battery
 local function trim(s)

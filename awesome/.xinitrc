@@ -46,5 +46,8 @@ fi
 # start the terminal emulator daemon
 urxvtd -q -f -o &
 
+#Start sceensaver
+/usr/bin/xscreensaver &
+
 # ░▒▓█ get awesome! █▓▒░
 exec /usr/bin/awesome
