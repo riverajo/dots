@@ -62,8 +62,8 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "nano"
+terminal = "urxvtc"
+editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -106,18 +106,18 @@ wp_timer:connect_signal("timeout", function()
   for s = 1, screen.count() do
     gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
   end
- 
+
   -- stop the timer (we don't need multiple instances running at the same time)
   wp_timer:stop()
- 
+
   -- get next random index
   wp_index = math.random( 1, #wp_files)
- 
+
   --restart the timer
   wp_timer.timeout = wp_timeout
   wp_timer:start()
 end)
- 
+
 -- initial start when rc.lua is first run
 wp_timer:start()
 
