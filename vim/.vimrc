@@ -23,7 +23,7 @@ Plugin 'wookiehangover/jshint.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-
+Plugin 'nvie/vim-flake8'
 
 
 " Reload Vimrc
@@ -40,9 +40,8 @@ map <c-h> <c-w>h
 " ==========================================================
 " Basic Settings
 " ==========================================================
-syntax enable                     " syntax highlighing
-filetype plugin indent on     " enable loading indent file for filetype
-filetype indent on
+syntax on                     " syntax highlighing
+filetype indent plugin on     " enable loading indent file for filetype
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
@@ -75,26 +74,27 @@ set pumheight=6             " Keep a small completion window
 
 
 """ Moving Around/Editing
-set cursorline              " have a line indicate the cursor location
-set ruler                   " show the cursor position all the time
-set nostartofline           " Avoid moving cursor to BOL when jumping around
-set virtualedit=block       " Let cursor move past the last char in <C-v> mode
-set scrolloff=3             " Keep 3 context lines above and below the cursor
-set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
-set showmatch               " Briefly jump to a paren once it's balanced
-set nowrap                  " don't wrap text
-set linebreak               " don't wrap textin the middle of a word
-set autoindent              " always set autoindenting on
-set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces
-set shiftwidth=4            " but an indent level is 2 spaces wide.
-set softtabstop=4           " <BS> over an autoindent deletes both spaces.
-set expandtab               " Use spaces, not tabs, for autoindent/tab key.
-set shiftround              " rounds indent to a multiple of shiftwidth
-set matchpairs+=<:>         " show matching <> (html mainly) as well
-set foldmethod=syntax       " allow us to fold on indents
-set foldlevel=10            " don't fold by default
-set number                  " show line numbers
+set cursorline                 " have a line indicate the cursor location
+set ruler                      " show the cursor position all the time
+set nostartofline              " Avoid moving cursor to BOL when jumping around
+set virtualedit=block          " Let cursor move past the last char in <C-v> mode
+set scrolloff=3                " Keep 3 context lines above and below the cursor
+set backspace=indent,eol,start " Allow backspacing over autoindent, EOL, and BOL
+set showmatch                  " Briefly jump to a paren once it's balanced
+set nowrap                     " don't wrap text
+set linebreak                  " don't wrap text in the middle of a word
+set autoindent                 " always set autoindenting on
+set tabstop=4                  " <tab> inserts 4 spaces
+set shiftwidth=4               " but an indent level is 2 spaces wide.
+set softtabstop=4              " <BS> over an autoindent deletes both spaces.
+set expandtab                  " Use spaces, not tabs, for autoindent/tab key.
+set shiftround                 " rounds indent to a multiple of shiftwidth
+set matchpairs+=<:>            " show matching <> (html mainly) as well
+set foldmethod=syntax          " allow us to fold on indents
+set foldlevel=10               " don't fold by default
+set number                     " show line numbers
+set relativenumber
+set pastetoggle=<F11>          " Use <F11> to toggle between 'paste' and 'nopaste'
 
 " don't outdent hashes
 "inoremap # #
@@ -179,3 +179,4 @@ set laststatus=2
 set t_Co=256
 autocmd FileType java setlocal shiftwidth=2 tabstop=2
 autocmd FileType cpp setlocal shiftwidth=2 tabstop=2
+let g:syntastic_aggregate_errors = 1
