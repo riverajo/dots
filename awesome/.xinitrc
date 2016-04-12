@@ -42,10 +42,8 @@ fi
 if [ -f $usermodmap ]; then
 	xrdb -merge $usermodmap
 fi
-
-# start the terminal emulator daemon
-urxvtd -q -f -o &
-
+#Start urxvt deamon
+urxvtd --quiet --opendisplay --fork
 #Start sceensaver
 /usr/bin/xscreensaver &
 
