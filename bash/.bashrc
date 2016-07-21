@@ -23,6 +23,7 @@ PS1="\[\e[01;32m\]\W \$ \[\e[00m\]"
 #export PYTHONSTARTUP
 
 complete -cf sudo
+complete -cf man
 export LESSCOLOR="always"
 export PATH=~/bin:$PATH
 eval "$(dircolors)"
