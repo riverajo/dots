@@ -1,0 +1,159 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! rxvt-unicode settings
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Plugins and settings
+URxvt.perl-ext-common:      font-size
+URxvt.perl-ext:             default,keyboard-select,url-select
+URxvt.keysym.C-i:           perl:url-select:select_next
+URxvt.keysym.M-bracketleft: perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+URxvt.url-select.launcher:  /usr/bin/google-chrome-stable
+URxvt.url-select.underline: true
+URxvt.scrollsytle:          xterm
+URxvt.scrollBar:            false
+URxvt.font:                 -*-terminus-medium-*-*-*-32-*-*-*-*-*-*-*
+URxvt.urgentOnBell:         true
+URxvt.tripleclickwords:     true
+URxvt.cursorUnderline:      true
+URxvt.cursorBlink:          true
+!URxvt.letterSpace: -3
+
+URxvt.font-size.step:  2
+URxvt.keysym.C-equal:  perl:font-size:increase
+URxvt.keysym.C-minus:  perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+URxvt.keysym.C-0:      perl:font-size:reset
+URxvt.keysym.C-slash:  perl:font-size:show
+
+! Normal
+! color0    black
+! color1    red
+! color2    green
+! color3    yellow
+! color4    blue
+! color5    purple
+! color6    cyan
+! color7    white
+
+URxvt.color0:  #000000
+URxvt.color1:  #e9897c
+URxvt.color2:  #b6e77d
+URxvt.color3:  #ecebbe
+URxvt.color4:  #a9cdeb
+URxvt.color5:  #ea96eb
+URxvt.color6:  #81a2be
+URxvt.color7:  #f2f2f2
+
+! Light
+! color8    black
+! color9    red
+! color10    green
+! color11    yellow
+! color12    blue
+! color13    purple
+! color14    cyan
+! color15    white
+
+URxvt.color8:  #747474
+URxvt.color9:  #cc6666
+URxvt.color10:  #b5bd68
+URxvt.color11:  #f0c674
+URxvt.color12:  #81a2be
+URxvt.color13:  #b294bb
+URxvt.color15: #e2e2e2
+
+! Other color settings
+! colorIT  italics
+! colorBD  bold
+! colorUL  underline
+
+URxvt.colorIT: #b294bb
+URxvt.colorBD: #81a2be
+URxvt.colorUL: #cc6666
+
+URxvt.foreground: #b6e77d
+
+! Use for "fake" transparency
+URxvt.transparent: true
+URxvt.shading:     20
+URxvt.background:  black
+URxvt.tint:        black
+
+! Use for true transparency
+! URxvt.depth: 32
+! URxvt.background: [70]#000000
+
+! Print to file instead of printer
+URxvt.print-pipe: cat > $(TMPDIR=$HOME mktemp urxvt.XXXXXX)
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! xterm settings
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+XTerm*scrollBar:   false
+XTerm*locale:      true
+XTerm*session.Mgt: false
+XTerm*font:        -*-terminus-medium-*-*-*-32-*-*-*-*-*-*-*
+
+! Normal
+! color0    black
+! color1    red
+! color2    green
+! color3    yellow
+! color4    blue
+! color5    purple
+! color6    cyan
+! color7    white
+
+XTerm*color0:  #6c6c6c
+XTerm*color1:  #e9897c
+XTerm*color2:  #b6e77d
+XTerm*color3:  #ecebbe
+XTerm*color5:  #ea96eb
+XTerm*color7:  #f2f2f2
+
+! Light
+! color8    black
+! color9    red
+! color10    green
+! color11    yellow
+! color12    blue
+! color13    purple
+! color14    cyan
+! color15    white
+
+XTerm*color8:  #747474
+XTerm*color9:  #f99286
+XTerm*color10: #c3f786
+XTerm*color11: #fcfbcc
+XTerm*color12: #b6defb
+XTerm*color13: #fba1fb
+XTerm*color15: #e2e2e2
+
+*background: black
+! *foreground: #b6e77d
+
+! Other color settings
+! colorBD  bold
+! colorUL  underline
+
+*VT100.colorBDMode:    true
+*VT100.colorULMode:    true
+*VT100.colorBD:        #d7d7d7
+*VT100.colorUL:        #e9897c
+*VT100.veryBoldColors: 6
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! other settings
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Xft.dpi:       192
+Xft.autohint:  0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting:   1
+Xft.antialias: 1
+Xft.rgba:      rgb

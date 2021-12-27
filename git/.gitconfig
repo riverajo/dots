@@ -1,6 +1,7 @@
 [user]
-    name = Joseph D Rivera
+    name = Joe Rivera
     email = rivera.d.joseph@gmail.com
+    signingkey = F16D7319FB2349B2
 
 [color]
     diff = auto
@@ -14,6 +15,7 @@
 [core]
     editor = vim
     pager = less -R
+	excludesfile = /home/jrivera/.gitignore_global
 
 [alias]
     diverges = !bash -c 'diff -u <(git rev-list --first-parent "${1}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
@@ -29,3 +31,20 @@
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ls = ls-files
 
+[hub]
+	protocol = ssh
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+
+[mergetool]
+	prompt = false
+
+[commit]
+	gpgsign = true
+[pull]
+	ff = only

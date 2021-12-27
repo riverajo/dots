@@ -1,30 +1,44 @@
 set nocompatible              " Don't be compatible with vi
 filetype on                   " try to detect filetypes
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+Plugin 'VundleVim/Vundle.vim'
 " My Bundles here:
 "
 " original repos on github
+Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb.git'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'msanders/snipmate.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/Gundo'
 Plugin 'phleet/vim-mercenary'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'saltstack/salt-vim'
-Plugin 'wookiehangover/jshint.vim'
+Plugin 'NikolayFrantsev/jshint2.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'nvie/vim-flake8'
 Plugin 'wikitopian/hardmode'
+Plugin 'hashivim/vim-terraform'
+Plugin 'hashivim/vim-packer'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'dense-analysis/ale'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/vim-slumlord'
+Plugin 'aklt/plantuml-syntax'
+Plugin 'lumiliet/vim-twig'
+
+call vundle#end()
+filetype plugin indent on
 
 
 let g:HardMode_level = 'wannabe'
@@ -49,7 +63,6 @@ set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
 let mapleader = ","
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " don't bell or blink
 set noerrorbells
@@ -138,21 +151,21 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 " python with virtualenv support
 
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
+" python << EOF
+" import os.path
+" import sys
+" import vim
+" if 'VIRTUAL_ENV' in os.environ:
+"     project_base_dir = os.environ['VIRTUAL_ENV']
+"     sys.path.insert(0, project_base_dir)
+"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"     execfile(activate_this, dict(__file__=activate_this))
+" EOF
 
-" Load up virtualenv's vimrc if it exists
-if filereadable($VIRTUAL_ENV . '/.vimrc')
-    source $VIRTUAL_ENV/.vimrc
-endif
+" " Load up virtualenv's vimrc if it exists
+" if filereadable($VIRTUAL_ENV . '/.vimrc')
+"     source $VIRTUAL_ENV/.vimrc
+" endif
 
 " dunno why I can't use matchadd for trailing whitespace....?
 highlight ExtraWhitespace ctermbg=darkgreen ctermfg=white guibg=darkgreen
@@ -171,15 +184,11 @@ nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
-set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim
-" Always show statusline
-" It's useful to show the buffer number in the status line.
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 set t_Co=256
 autocmd FileType java setlocal shiftwidth=2 tabstop=2
 autocmd FileType cpp setlocal shiftwidth=2 tabstop=2
-let g:syntastic_aggregate_errors = 1
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
@@ -200,3 +209,35 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_metalinter_autosave = 1
+let g:ale_linters = {
+    \ 'go': ['gopls', 'vet', 'golint'],
+    \ 'javascript': ['eslint'],
+    \}
+
+" Backup/Undo settings
+execute "set directory=~/.vim/swap//"
+execute "set backupdir=~/.vim/backup//"
+execute "set undodir=~/.vim/undo//"
+set backup
+set undofile
+set writebackup
+
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_theme = 'badwolf'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_fix_on_save = 1

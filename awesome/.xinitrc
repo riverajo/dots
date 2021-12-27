@@ -42,10 +42,14 @@ fi
 if [ -f $usermodmap ]; then
 	xrdb -merge $usermodmap
 fi
+xset +fp /usr/share/fonts/terminus
 #Start urxvt deamon
 urxvtd --quiet --opendisplay --fork
 #Start sceensaver
 /usr/bin/xscreensaver &
 
+nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
 # ░▒▓█ get awesome! █▓▒░
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 exec /usr/bin/awesome
